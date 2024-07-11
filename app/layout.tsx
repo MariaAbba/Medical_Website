@@ -1,22 +1,40 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next'
+import { Plus_Jakarta_Sans as FontSans } from 'next/font/google'
+import './globals.css'
 
-const inter = Inter({ subsets: ["latin"] });
+import { cn } from '@/lib/utils'
+import { ThemeProvider } from '@/components/theme.provider'
+
+const fontSans = FontSans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-sans',
+})
 
 export const metadata: Metadata = {
-  title: "HealthCare Website",
-  description: "Healthcare management system",
-};
+  title: 'HealthCare Website',
+  description: 'Healthcare management system',
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body
+        className={cn(
+          'min-h-screen bg-dark-300 font-sans antialiased',
+          fontSans.variable
+        )}
+      >
+        {' '}
+        <ThemeProvider 
+        attribute="class" defaultTheme="dark">
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
-  );
+  )
 }
