@@ -27,35 +27,41 @@ interface CustomProps {
   renderSkeleton?: (field: any) => React.ReactNode
 }
 
-const RenderField = ({field, props} : {field: any; props: CustomProps}) => {
-const {fieldType,iconSrc, iconAlt, placeholder,  } = props
+const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
+  const { fieldType, iconSrc, iconAlt, placeholder } = props
 
- switch (fieldType){
-  case FormFieldType.INPUT:
+  switch (fieldType) {
+    case FormFieldType.INPUT:
+      return (
+        <div className="flex rounded-md border border-dark-500 bg-dark-400">
+          {iconSrc && (
+            <Image
+              src={iconSrc}
+              height={24}
+              width={24}
+              alt={iconAlt || 'icon'}
+              className="ml-2"
+            />
+          )}
+          <FormControl>
+            <Input
+              placeholder={placeholder}
+              {...field}
+              className="shad-input border-0"
+            />
+          </FormControl>
+        </div>
+      )
+      case FormFieldType.PHONE_INPUT:
+        return (
+          <FormControl>
+            <PhoneInput />
+          </FormControl>
+        )
 
-  return (
-    <div className='flex rounded-md border border-dark-500 bg-dark-400'>
-      {iconSrc && (
-        <Image 
-        src={iconSrc}
-        height={24}
-        width={24}
-        alt={iconAlt || 'icon'}
-        className='ml-2'
-        />
-      )}
-      <FormControl>
-<Input
-placeholder={placeholder}
-{...field}
-className='shad-input border-0'
-/>
-      </FormControl>
-    </div>
-  )
-  default:
-  break;
- }
+    default:
+      break
+  }
 }
 
 const CustomFormField = (props: CustomProps) => {
@@ -72,7 +78,7 @@ const CustomFormField = (props: CustomProps) => {
           )}
           <RenderField field={field} props={props} />
 
-          <FormMessage className='shad-error' />
+          <FormMessage className="shad-error" />
         </FormItem>
       )}
     />

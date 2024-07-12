@@ -62,6 +62,22 @@ const PatientForm = () => {
           iconSrc="/assets/icons/user.svg"
           iconAlt="user"
           />
+        <CustomFormField
+         fieldType={FormFieldType.INPUT}
+          control={form.control} 
+          name="email"
+          label="Email"
+          placeholder="maryabba@gmail.com"
+          iconSrc="/assets/icons/email.svg"
+          iconAlt="email"
+          />
+        <CustomFormField
+         fieldType={FormFieldType.PHONE_INPUT}
+          control={form.control} 
+          name="phone"
+          label="Phone number"
+          placeholder="(050) 123-45-67"
+          />
         <Button type="submit">Submit</Button>
       </form>
     </Form>
